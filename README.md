@@ -113,3 +113,73 @@ En cliquant sur le job dire-bonjour, je peux consulter les logs et voir le messa
 Bonjour depuis GitHub Actions !
 
 La coche verte indique que le workflow fonctionne sans problème.
+
+<img width="1900" height="793" alt="image" src="https://github.com/user-attachments/assets/f1c450a2-784d-4a5f-95b4-a8499073f60a" />
+
+## Exercice 2 - Anatomie d’un fichier de workflow
+
+**Objectif** : Comprendre la structure d’un fichier YAML de workflow et savoir nommer chacune de ses parties.
+
+Pour cette exercie, dans le répertoire "TP-CI-CD" 
+
+```bash
+ubuntu@ubuntu-devsecops:~/TP-CI-CD$ pwd
+/home/ubuntu/TP-CI-CD
+ubuntu@ubuntu-devsecops:~/TP-CI-CD$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+ubuntu@ubuntu-devsecops:~/TP-CI-CD$ 
+```
+
+Le fichier .github/workflows est bien présent : 
+
+```bash
+ubuntu@ubuntu-devsecops:~/TP-CI-CD$ ls -la .github/workflows
+total 12
+drwxrwxr-x 2 ubuntu ubuntu 4096 juin  11 12:22 .
+drwxrwxr-x 3 ubuntu ubuntu 4096 juin  11 11:51 ..
+-rw-rw-r-- 1 ubuntu ubuntu  196 juin  11 12:22 bonjour.yml
+ubuntu@ubuntu-devsecops:~/TP-CI-CD$ 
+```
+Avec le contenu que j'ai spécifié dans le précédent exercice : 
+
+```bash
+ubuntu@ubuntu-devsecops:~/TP-CI-CD$ cat .github/workflows/bonjour.yml
+name: Bonjour
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  dire-bonjour:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Afficher un message
+        run: echo "Bonjour depuis GitHub Actions !"
+ubuntu@ubuntu-devsecops:~/TP-CI-CD$ 
+```
+Je vais donc editer ce fichier et y renseigner le contenu suivant : 
+
+```bash
+name: Workflow d'initiation
+
+on: push
+
+jobs:
+  saluer-le-monde:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Afficher un message de bienvenue
+        run: echo "Bonjour depuis GitHub Actions !"
+
+      - name: Afficher la date du jour
+        run: date
+
+      - name: Afficher l'utilisateur GitHub qui a lancé le workflow
+        run: echo "Workflow lancé par ${{ github.actor }}"
+```
