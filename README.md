@@ -183,3 +183,10 @@ jobs:
       - name: Afficher l'utilisateur GitHub qui a lancé le workflow
         run: echo "Workflow lancé par ${{ github.actor }}"
 ```
+Ensuite, je vais ajouter commiter et pousser le fichier modifié sur Github : 
+
+```bash
+git add .github/workflows/bonjour.yml
+git commit -m "Modification du workflow d'initiation"
+git push origin main
+```
