@@ -2,6 +2,8 @@ name: Bonjour
 
 on:
   push:
+    paths-ignore:
+      - 'README.md'
   workflow_dispatch:
 
 jobs:
